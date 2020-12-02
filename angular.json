@@ -33,7 +33,11 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "src/styles/js/adminlte.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -127,5 +131,8 @@
       }
     }
   },
-  "defaultProject": "EInvoiceSPA"
+  "defaultProject": "EInvoiceSPA",
+  "cli": {
+    "analytics": "91953dad-0e48-4ca5-b8c0-0f8889198a3b"
+  }
 }
