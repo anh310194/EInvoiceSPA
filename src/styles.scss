@@ -3,4 +3,6 @@
 @import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 @import '../node_modules/icheck-bootstrap/icheck-bootstrap.min.css';
 @import 'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css';
-@import './styles/css/adminlte.min.css'
+@import './styles/css/adminlte.min.css';
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

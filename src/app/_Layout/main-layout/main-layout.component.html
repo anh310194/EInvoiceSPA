@@ -1,0 +1,49 @@
+<div class="sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <app-site-header></app-site-header>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <app-site-menu></app-site-menu>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">{{pageName}}</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <!-- <li class="breadcrumb-item active"><a href="/home">Home</a></li> -->
+                                <li class="breadcrumb-item active"><a href="/"></a>Dashboard</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <div class="content">
+                <div class="container-fluid">
+                    <router-outlet></router-outlet>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <app-control-sidebar></app-control-sidebar>
+        <!-- /.control-sidebar -->
+
+        <!-- Main Footer -->
+        <app-site-footer></app-site-footer>
+    </div>
+    <!-- ./wrapper -->
+</div>
