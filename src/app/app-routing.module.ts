@@ -18,22 +18,20 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard] },
       { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-      { path: "not-found", component: NotFoundComponent },
+      { path: "not-found", component: NotFoundComponent, canActivate: [AuthGuard] },
     ]
   },
   {
     path: '',
     component: AuthLayoutComponent,
     children: [
-      { path: "login", component: LoginComponent },
+      { path: 'login', component: LoginComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'recover-password', component: RecoverPasswordComponent },
     ]
   },
-  // { path: "login", component: LoginComponent }
   { path: '**', redirectTo: '/not-found' }
-
 ];
 
 @NgModule({

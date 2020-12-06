@@ -15,30 +15,25 @@ export class AuthenticateService {
   private authStorage = "authentication";
   private authSubject: BehaviorSubject<AuthModel>;
   public auth: Observable<AuthModel>;
-  private user! : User;
-  private menu!: MenuModel;
-  private notifications!: Array<NotificationModel>;
   constructor(
     private router: Router,
     private http: HttpClient
   ) {
     this.authSubject = new BehaviorSubject<AuthModel>(JSON.parse(localStorage.getItem(this.authStorage)!));
     this.auth = this.authSubject.asObservable();
-    if(this.authSubject.value){
-      this.user = this.authSubject.value.UserProfile;
-      this.menu = this.authSubject.value.Menu;
-      this.notifications = this.authSubject.value.Notifications;
-    }
   }
 
   public get userValue(): User {
-    return this.user; 
+    if(!this.authSubject.value) return null!;
+    return this.authSubject.value.UserProfile; 
   }
   public get menuValue(): MenuModel {
-    return this.menu; 
+    if(!this.authSubject.value) return null!;
+    return this.authSubject.value.Menu; 
   }
   public get notificationsValue(): Array<NotificationModel> {
-    return this.notifications; 
+    if(!this.authSubject.value) return null!;
+    return this.authSubject.value.Notifications; 
   }
 
 
@@ -57,6 +52,6 @@ export class AuthenticateService {
     // remove user from local storage and set current user to null
     localStorage.removeItem(this.authStorage);
     this.authSubject.next(null!);
-    this.router.navigate(['/login']);
+    this.router.navigateByUrl('/login');
   }
 }

@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
     .subscribe(
       data => {        
         this.isHidden= false;
+        console.log(this.returnUrl);
         this.router.navigate([this.returnUrl]);
       },
       error => {
