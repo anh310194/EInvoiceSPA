@@ -35,6 +35,10 @@ export class AuthenticateService {
     if(!this.authSubject.value) return this.authSubject.value;
     return this.authSubject.value.Notifications; 
   }
+  public get Roles(): Array<string> {
+    if(!this.authSubject.value) return this.authSubject.value;
+    return this.authSubject.value.Roles; 
+  }
 
 
   login(username: any, password: any) {

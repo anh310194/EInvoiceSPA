@@ -6,6 +6,7 @@ export class AuthModel {
     Language: string = 'En';
     Notifications: Array<NotificationModel> = [];
     Token!: string; 
+    Roles!:Array<string>
 }
 
 export class MenuModel {
