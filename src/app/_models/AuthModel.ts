@@ -2,7 +2,7 @@ import { User } from "./User"
 
 export class AuthModel {
     UserProfile!: User;
-    Menu!: MenuModel;
+    Menu!: Array<MenuModel>;
     Language: string = 'En';
     Notifications: Array<NotificationModel> = [];
     Token!: string; 

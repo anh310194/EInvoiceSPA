@@ -24,15 +24,15 @@ export class AuthenticateService {
   }
 
   public get userValue(): User {
-    if(!this.authSubject.value) return null!;
+    if(!this.authSubject.value) return this.authSubject.value;
     return this.authSubject.value.UserProfile; 
   }
-  public get menuValue(): MenuModel {
-    if(!this.authSubject.value) return null!;
+  public get menuValue(): Array<MenuModel> {
+    if(!this.authSubject.value) return this.authSubject.value;
     return this.authSubject.value.Menu; 
   }
   public get notificationsValue(): Array<NotificationModel> {
-    if(!this.authSubject.value) return null!;
+    if(!this.authSubject.value) return this.authSubject.value;
     return this.authSubject.value.Notifications; 
   }
 
