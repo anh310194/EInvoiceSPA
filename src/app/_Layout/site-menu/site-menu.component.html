@@ -51,17 +51,17 @@
                         </li>
                     </ul>
                 </li> -->
-                <li *ngFor="let menu of menus" class="nav-item">
+                <li *ngFor="let menu of menus" class="nav-item" [ngClass]="(activeItem==menu.ModuleName)?'menu-open':''">
                     <a href="" class="nav-link active">                        
                         <p>
-                            {{menu.ModuleName}}
+                            {{menu.DisplayText}}
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li *ngFor="let child of menu.Children" class="nav-item">
-                            <a href="./{{child.Controller}}" class="nav-link">
-                                <p>{{child.ModuleName}}</p>
+                            <a href="./{{child.Controller}}" class="nav-link" [ngClass]="(activeLink==child.ModuleName)?'active':''">
+                                <p>{{child.DisplayText}}</p>
                             </a>
                         </li>
                     </ul>

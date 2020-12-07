@@ -19,6 +19,16 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 import { RegisterComponent } from './register/register.component';
+import { UserComponent } from './user/user.component';
+import { RoleComponent } from './role/role.component';
+import { TvanComponent } from './tvan/tvan.component';
+import { InvoiceBookComponent } from './invoice-book/invoice-book.component';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { TransactionComponent } from './transaction/transaction.component';
+import { ReportInvoiceStatusComponent } from './report-invoice-status/report-invoice-status.component';
+import { TransferComponent } from './transfer/transfer.component';
+import { TenantComponent } from './tenant/tenant.component';
+import { UserTenantComponent } from './user-tenant/user-tenant.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +45,17 @@ import { RegisterComponent } from './register/register.component';
     NotFoundComponent,
     ForgotPasswordComponent,
     RecoverPasswordComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserComponent,
+    RoleComponent,
+    TvanComponent,
+    InvoiceBookComponent,
+    InvoiceComponent,
+    TransactionComponent,
+    ReportInvoiceStatusComponent,
+    TransferComponent,
+    TenantComponent,
+    UserTenantComponent
   ],
   imports: [
     BrowserModule,
