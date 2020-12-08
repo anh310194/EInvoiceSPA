@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MenuModel } from 'src/app/_models/AuthModel';
 
+import { AuthenticateService } from '../../_services/authenticate.service';
 @Component({
   selector: 'app-main-layout',
   templateUrl: './main-layout.component.html',
@@ -8,10 +10,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MainLayoutComponent implements OnInit {
   pageName: string = 'Home';
-
-  constructor(private activeRoute: ActivatedRoute) {
+  pageNames: Array<string>= [];
+  constructor(private activeRoute: ActivatedRoute, private authService: AuthenticateService) {
     let currentComponent: any = activeRoute.children[0].component;
-    this.pageName = this.getNamePage(currentComponent);
+    let currentmenu = this.authService.getCurrentMenu(currentComponent, true);
+    if(currentmenu){
+      this.setPageNames(currentmenu);      
+      this.pageName = this.pageNames[this.pageNames.length - 1];
+    }
   }
 
   ngOnInit(): void {
@@ -25,11 +31,11 @@ export class MainLayoutComponent implements OnInit {
     }
   }
 
-  private getNamePage(component: any) {
-    let result = 'Home';
-    let componentName = component.name;
-    if (componentName)
-      result = componentName.substring(0, componentName.length - 'Component'.length);
-    return result;
+  private setPageNames(menu: MenuModel){
+    this.pageNames.push(menu.DisplayText);    
+    if(menu.Children && menu.Children.length > 0){
+      let child = menu.Children[0];
+      this.setPageNames(child);
+    }
   }
 }

@@ -15,41 +15,16 @@ export class SiteMenuComponent implements OnInit {
   menus: Array<MenuModel>;
   constructor(private activeRoute: ActivatedRoute, authService: AuthenticateService) {
     let currentComponent: any = activeRoute.children[0].component;
-    this.activeLink = this.getActiveLink(currentComponent);
+    let currentmenu = authService.getCurrentMenu(currentComponent, true);
     this.menus = authService.menuValue;
     this.UserName = authService.userValue.UserName;
-    this.activeItem = this.getActiveItem();
+    if (currentmenu) {
+      this.activeLink = currentmenu.Children[0].ModuleName;
+      this.activeItem = currentmenu.ModuleName;
+    }
   }
 
   ngOnInit(): void {
-  }
-
-  private getActiveLink(component: any) {
-    let result = "";
-    if (component.name) {
-      let length: number = component.name.length - 'Component'.length;
-      result = component.name.substring(0, length);
-    }
-    return result;
-  }
-
-  private getActiveItem() {
-    let result = "";
-    this.menus.forEach((element: MenuModel) => {
-      let isActive: boolean = false;
-      element.Children.forEach((childEl: MenuModel) => {
-        if(childEl.ModuleName == this.activeLink)
-        { 
-          isActive = true;
-          return;
-        }
-      });
-      if(isActive) {
-        result = element.ModuleName;
-        return;
-      }
-    });
-    return result;
   }
 
 }

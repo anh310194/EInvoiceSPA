@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from "rxjs/operators";
 
 import { AuthenticateService } from '../_services/authenticate.service';
+import { UserLogin } from '../_models/User';
 
 @Component({
   selector: 'app-login',
@@ -22,9 +23,11 @@ export class LoginComponent implements OnInit {
     private authService: AuthenticateService
   ) {
     this.isHidden = false;
+    let userLogin = authService.rememberValue;
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: [userLogin.UserName, Validators.required],
+      password: [userLogin.Password, Validators.required],
+      remember: [userLogin.Remember]
     });
 
     // get return url from route parameters or default to '/'
@@ -32,10 +35,15 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void { }
-  
+
   // convenience getter for easy access to form fields
-  get f() {
-    return this.loginForm.controls;
+  getUserLogin(): UserLogin {
+    let userLogin: UserLogin = new UserLogin();
+    userLogin.UserName = this.loginForm.controls.username.value;
+    userLogin.Password = this.loginForm.controls.password.value;
+    userLogin.Remember = this.loginForm.controls.remember.value;
+    userLogin.Language = "En";
+    return userLogin;
   }
 
   onSubmit() {
@@ -43,20 +51,17 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    
     this.isHidden = true;
-    this.authService
-    .login(this.f.username.value, this.f.password.value)
-    .pipe(first())
-    .subscribe(
-      data => {        
-        this.isHidden= false;
-        console.log(this.returnUrl);
-        this.router.navigate([this.returnUrl]);
-      },
-      error => {
-        this.isHidden= false;
-      }
-    );
+    this.authService.login(this.getUserLogin()).pipe(first())
+      .subscribe(
+        data => {
+          this.isHidden = false;
+          console.log(this.returnUrl);
+          this.router.navigate([this.returnUrl]);
+        },
+        error => {
+          this.isHidden = false;
+        }
+      );
   }
 }
