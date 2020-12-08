@@ -19,7 +19,7 @@ export class AuthenticateService {
     private router: Router,
     private http: HttpClient
   ) {
-    this.authSubject = new BehaviorSubject<AuthModel>(JSON.parse(localStorage.getItem(this.authStorage)!));
+    this.authSubject = new BehaviorSubject<AuthModel>(JSON.parse(sessionStorage.getItem(this.authStorage)!));
     this.auth = this.authSubject.asObservable();
   }
 
@@ -46,7 +46,7 @@ export class AuthenticateService {
     return this.http.post<AuthModel>(endpoint, { UserName: username, Password: password })
       .pipe(map(auth => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem(this.authStorage, JSON.stringify(auth));
+        sessionStorage.setItem(this.authStorage, JSON.stringify(auth));
         this.authSubject.next(auth);
         return auth;
       }));
@@ -54,7 +54,7 @@ export class AuthenticateService {
 
   public logout() {
     // remove user from local storage and set current user to null
-    localStorage.removeItem(this.authStorage);
+    sessionStorage.removeItem(this.authStorage);
     this.authSubject.next(null!);
     this.router.navigateByUrl('/login');
   }
