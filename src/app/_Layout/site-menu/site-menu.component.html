@@ -35,7 +35,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">                
                 <li *ngFor="let menu of menus" class="nav-item" [ngClass]="(activeItem==menu.ModuleName)?'menu-open':''">
-                    <a href="" class="nav-link active">                        
+                    <a class="nav-link active">                        
                         <p>
                             {{menu.DisplayText}}
                             <i class="right fas fa-angle-left"></i>

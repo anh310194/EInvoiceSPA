@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 
+import { environment } from '../../environments/environment';
 import { User, UserLogin } from '../_models/User'
 import { AuthModel, MenuModel, NotificationModel } from '../_models/AuthModel'
 
@@ -31,6 +31,11 @@ export class AuthenticateService {
   public get menuValue(): Array<MenuModel> {
     if (!this.authSubject.value) return this.authSubject.value;
     return this.authSubject.value.Menu;
+  }
+
+  public get AuthorizationValue(): string {
+    if (!this.authSubject.value) return this.authSubject.value;
+    return "Bearer " + this.authSubject.value.Token;
   }
 
   public getCurrentMenu(component: any, includeParent: boolean = false): MenuModel {

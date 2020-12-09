@@ -1,1 +1,35 @@
-<p>user works!</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <button class="btn btn-primary float-right">Add New</button>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>User Name</th>
+                            <th>FullName</th>
+                            <th>Email</th>
+                            <th>Active</th>
+                            <th>Tenant</th>
+                            <th>User Type</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor ="let user of UserList">
+                        <tr id="{{user.Id}}">
+                            <td></td>
+                            <td>{{user.UserName}}</td>
+                            <td>{{user.FullName}}</td>
+                            <td>{{user.Email}}</td>
+                            <td>{{user.IsActive}}</td>
+                            <td>{{user.TenantName}}</td>
+                            <td>{{user.UserType}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
