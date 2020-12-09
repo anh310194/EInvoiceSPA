@@ -5,30 +5,35 @@
                 <button class="btn btn-primary float-right">Add New</button>
             </div>
             <div class="card-body">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Action</th>
-                            <th>User Name</th>
-                            <th>FullName</th>
-                            <th>Email</th>
-                            <th>Active</th>
-                            <th>Tenant</th>
-                            <th>User Type</th>
-                        </tr>
-                    </thead>
-                    <tbody *ngFor ="let user of UserList">
-                        <tr id="{{user.Id}}">
-                            <td></td>
-                            <td>{{user.UserName}}</td>
-                            <td>{{user.FullName}}</td>
-                            <td>{{user.Email}}</td>
-                            <td>{{user.IsActive}}</td>
-                            <td>{{user.TenantName}}</td>
-                            <td>{{user.UserType}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="overlay-wrapper">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>User Name</th>
+                                <th>FullName</th>
+                                <th>Email</th>
+                                <th>Active</th>
+                                <th>Tenant</th>
+                                <th>User Type</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let user of tableReponse.ListRows">
+                            <tr id="{{user.Id}}">
+                                <td></td>
+                                <td>{{user.UserName}}</td>
+                                <td>{{user.FullName}}</td>
+                                <td>{{user.Email}}</td>
+                                <td>{{user.IsActive}}</td>
+                                <td>{{user.TenantName}}</td>
+                                <td>{{user.UserType}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="overlay" [hidden]="!isHidden">
+                        <i class="fas fa-3x fa-sync-alt fa-spin"></i><div class="text-bold pt-2">Loading...</div>
+                      </div>
+                </div>
             </div>
         </div>
     </div>

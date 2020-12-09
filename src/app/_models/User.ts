@@ -20,13 +20,3 @@ export class UserLogin {
     Remember!: any;
     Language!: any;
 }
-
-export class UserManagement {
-    Id!: number;
-    UserName!: string;
-    FullName!: string;
-    Email!: string;
-    IsActive!: boolean;
-    TenantName!: string;
-    UserType!: string;
-}

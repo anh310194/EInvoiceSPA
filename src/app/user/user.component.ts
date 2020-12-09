@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from "rxjs/operators";
 
-import { UserManagement } from '../_models/User';
+import { UserManagementResponse } from '../_responses/UserManagementResponse'
+import { TableReponse } from '../_responses/TableReponse'
 import { UserService } from '../_services/user.service'
 @Component({
   selector: 'app-user',
@@ -9,23 +10,29 @@ import { UserService } from '../_services/user.service'
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  UserList: Array<UserManagement> = [];
+  tableReponse!: TableReponse<UserManagementResponse>;
+  isHidden: boolean;
+
   constructor(private userService: UserService) {
-   
-   }
+    this.isHidden = false;
+    this.tableReponse = new TableReponse<UserManagementResponse>();
+  }
 
   ngOnInit(): void {
     this.LoadBodyTable();
   }
 
-  LoadBodyTable(){
+  LoadBodyTable() {
+    this.isHidden =true;
     this.userService.GetUserList().pipe(first())
-    .subscribe(
-      data=>{
-        this.UserList = data;
-      },
-      error=>{
-      }
-    );
+      .subscribe(
+        data => {
+          this.tableReponse = data;
+          this.isHidden = false;
+        },
+        error => {
+          this.isHidden = false;
+        }
+      );
   }
 }
