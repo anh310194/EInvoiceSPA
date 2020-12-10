@@ -33,9 +33,29 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">                
-                <li *ngFor="let menu of menus" class="nav-item" [ngClass]="(activeItem==menu.ModuleName)?'menu-open':''">
-                    <a class="nav-link active">                        
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                <li class="nav-item" [ngClass]="(activeItem=='Home')?'menu-open':''">
+                    <a class="nav-link" [ngClass]="(activeItem=='Home')?'active':''">
+                        <p>
+                            Dashboard
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/" class="nav-link" [ngClass]="(activeItem=='Home')?'active':''">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Home
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li *ngFor="let menu of menus" class="nav-item"
+                    [ngClass]="(activeItem==menu.ModuleName)?'menu-open':''">
+                    <a class="nav-link" [ngClass]="(activeItem==menu.ModuleName)?'active':''">
                         <p>
                             {{menu.DisplayText}}
                             <i class="right fas fa-angle-left"></i>
@@ -43,7 +63,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li *ngFor="let child of menu.Children" class="nav-item">
-                            <a href="./{{child.Controller}}" class="nav-link" [ngClass]="(activeLink==child.ModuleName)?'active':''">
+                            <a href="./{{child.Controller}}" class="nav-link"
+                                [ngClass]="(activeLink==child.ModuleName)?'active':''">
+                                <i class="far fa-circle nav-icon"></i>
                                 <p>{{child.DisplayText}}</p>
                             </a>
                         </li>
