@@ -33,10 +33,10 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" id="TreeviewMenu" data-widget="treeview" role="menu" data-accordion="false">
 
                 <li class="nav-item" [ngClass]="(activeItem=='Home')?'menu-open':''">
-                    <a class="nav-link" [ngClass]="(activeItem=='Home')?'active':''">
+                    <a class="nav-link" id="Home" [ngClass]="(activeItem=='Home')?'active':''">
                         <p>
                             Dashboard
                             <i class="right fas fa-angle-left"></i>
