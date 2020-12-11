@@ -44,7 +44,7 @@ export class SiteMenuComponent implements OnInit {
     let config: any = {
       trigger: KeyTreeview.SELECTOR_DATA_WIDGET$2 + " " + KeyTreeview.SELECTOR_LINK,
       animationSpeed: 300,
-      accordion: true,
+      accordion: false,
       expandSidebar: false,
       sidebarButtonSelector: '[data-widget="pushmenu"]'
     }
