@@ -55,23 +55,23 @@ export class SiteMenuComponent implements OnInit {
 
   toggle(event: any) {
     // Using Jquery
-    //let relativeTarget = $(event.currentTarget);
-    // let parent = relativeTarget.parent();
-    // let treeviewMenu = parent.find("> " + KeyTreeview.SELECTOR_TREEVIEW_MENU);
+    let relativeTarget = $(event.currentTarget);
+    let parent = relativeTarget.parent();
+    let treeviewMenu = parent.find("> " + KeyTreeview.SELECTOR_TREEVIEW_MENU);
 
-    // if (!treeviewMenu.is(KeyTreeview.SELECTOR_TREEVIEW_MENU)) {
-    //   if (!parent.is(KeyTreeview.SELECTOR_LI)) {
-    //     treeviewMenu = parent.parent().find("> " + KeyTreeview.SELECTOR_TREEVIEW_MENU);
-    //   }
+    if (!treeviewMenu.is(KeyTreeview.SELECTOR_TREEVIEW_MENU)) {
+      if (!parent.is(KeyTreeview.SELECTOR_LI)) {
+        treeviewMenu = parent.parent().find("> " + KeyTreeview.SELECTOR_TREEVIEW_MENU);
+      }
 
-    //   if (!treeviewMenu.is(KeyTreeview.SELECTOR_TREEVIEW_MENU)) {
-    //     return;
-    //   }
-    // }
+      if (!treeviewMenu.is(KeyTreeview.SELECTOR_TREEVIEW_MENU)) {
+        return;
+      }
+    }
 
     // event.preventDefault();
-    //let parentLi = relativeTarget.parents(KeyTreeview.SELECTOR_LI).first();
-    // let isOpen = parentLi.hasClass(KeyTreeview.CLASS_NAME_OPEN$2);
+    let parentLi = relativeTarget.parents(KeyTreeview.SELECTOR_LI).first();
+    //let isOpen = parentLi.hasClass(KeyTreeview.CLASS_NAME_OPEN$2);
     // if (isOpen) {
     //   this.collapse($(treeviewMenu), parentLi);
     // }
@@ -84,7 +84,7 @@ export class SiteMenuComponent implements OnInit {
     let classSELECTOR_LI = KeyTreeview.SELECTOR_LI.substr(1);
     let classCLASS_NAME_OPEN = KeyTreeview.CLASS_NAME_OPEN$2.substr(1);
     let parentDOM = event.currentTarget.parentElement;
-    let treeviewMenuDOM = parentDOM.getElementsByClassName(classSELECTOR_TREEVIEW_MENU)
+    let treeviewMenuDOM = parentDOM.querySelectorAll(KeyTreeview.SELECTOR_TREEVIEW_MENU);
 
     if (!this.IsDOM(treeviewMenuDOM, classSELECTOR_TREEVIEW_MENU)) {
       if (!this.IsDOM(parentDOM, classSELECTOR_LI)) {
@@ -102,7 +102,7 @@ export class SiteMenuComponent implements OnInit {
       this.collapse(treeviewMenuDOM, parentLiDOM);
     }
     else {
-      this.expand($(treeviewMenuDOM), parentLiDOM);
+      this.expand(treeviewMenuDOM, parentLiDOM, parentLi);
     }
   }
 
@@ -130,7 +130,7 @@ export class SiteMenuComponent implements OnInit {
     });
   }
 
-  expand(treeviewMenu: any, parentLi: any) {
+  expand(treeviewMenu: any, parentLiDOM: any, parentLi: any) {
     let thisMain = this;
     var expandedEvent = $.Event(KeyTreeview.EVENT_EXPANDED$3);
 
