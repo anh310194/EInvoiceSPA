@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // apiUrl:'http://192.168.1.7:8081'
-  apiUrl:'http://192.168.202.129:8081'
+  apiUrl:'http://192.168.1.7:8081'
+  // apiUrl:'http://192.168.202.129:8081'
 };
 
 /*
