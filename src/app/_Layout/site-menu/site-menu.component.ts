@@ -102,7 +102,7 @@ export class SiteMenuComponent implements OnInit {
       this.collapse(treeviewMenuDOM, parentLiDOM);
     }
     else {
-      this.expand(treeviewMenuDOM, parentLiDOM, parentLi);
+      this.expand(treeviewMenuDOM, parentLiDOM);
     }
   }
 
@@ -130,17 +130,17 @@ export class SiteMenuComponent implements OnInit {
     });
   }
 
-  expand(treeviewMenu: any, parentLiDOM: any, parentLi: any) {
+  expand(treeviewMenu: any, parentLi: any) {
     let thisMain = this;
     var expandedEvent = $.Event(KeyTreeview.EVENT_EXPANDED$3);
 
-    if (thisMain._config.accordion) {
-      let openMenuLi = parentLi.siblings(KeyTreeview.SELECTOR_OPEN).first();
-      let openTreeView = openMenuLi.find(KeyTreeview.SELECTOR_TREEVIEW_MENU).first();
-      thisMain.collapse(openTreeView, openMenuLi);
-    }
+    // if (thisMain._config.accordion) {
+    //   let openMenuLi = parentLi.siblings(KeyTreeview.SELECTOR_OPEN).first();
+    //   let openTreeView = openMenuLi.find(KeyTreeview.SELECTOR_TREEVIEW_MENU).first();
+    //   thisMain.collapse(openTreeView, openMenuLi);
+    // }
 
-    parentLi.addClass(KeyTreeview.CLASS_NAME_IS_OPENING$1);
+    parentLi.classList.add(KeyTreeview.CLASS_NAME_IS_OPENING$1);
     treeviewMenu.stop().slideDown(this._config.animationSpeed, function () {
       parentLi.addClass(KeyTreeview.CLASS_NAME_OPEN$2);
       $(thisMain._element).trigger(expandedEvent);
