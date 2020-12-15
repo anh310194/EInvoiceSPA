@@ -39,7 +39,7 @@ export class SiteMenuComponent implements OnInit {
 
     let thisMain = this;
     let parentLi = event.currentTarget.parentElement;
-    let isOpen = parentLi.classList.contains(className);
+    let isOpen = parentLi.classList.contains(thisMain.classMenuOpen);
     let treeviewMenus = parentLi.querySelectorAll(":scope > .nav-treeview");
     if (treeviewMenus.lenght <= 0) { return; }
     let treeviewMenu = treeviewMenus[0];
