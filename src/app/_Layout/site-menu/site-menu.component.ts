@@ -13,6 +13,8 @@ export class SiteMenuComponent implements OnInit {
   activeLink: string = "";
   UserName = 'sysadmin';
   activeItem = 'Home';
+  classMenuOpen = 'menu-open';
+  classMenuOpening = "menu-is-opening";
   menus: Array<MenuModel>;
   constructor(
     activeRoute: ActivatedRoute,
@@ -37,26 +39,31 @@ export class SiteMenuComponent implements OnInit {
 
     let thisMain = this;
     let parentLi = event.currentTarget.parentElement;
-    let className = 'menu-open';
     let isOpen = parentLi.classList.contains(className);
     let treeviewMenus = parentLi.querySelectorAll(":scope > .nav-treeview");
-    treeviewMenus.forEach((treeviewMenu: any) => {
-      if (isOpen)
-        thisMain.collapse(parentLi, treeviewMenu);
-      else thisMain.expand(parentLi, treeviewMenu);
-    });
+    if (treeviewMenus.lenght <= 0) { return; }
+    let treeviewMenu = treeviewMenus[0];
+    if (isOpen)
+      thisMain.collapse(parentLi, treeviewMenu);
+    else thisMain.expand(parentLi, treeviewMenu);
+
   }
 
   expand(parentLi: any, treeViewMenu: any) {
-    let className = 'menu-open';
-    parentLi.classList.add("menu-is-opening");
-    parentLi.classList.toggle(className);
-
+    let thisMain = this;
+    parentLi.classList.add(thisMain.classMenuOpen);
+    parentLi.classList.add(thisMain.classMenuOpening);
+    window.setTimeout(function () {
+      treeViewMenu.style.display = 'block';
+    }, 300);
   }
 
   collapse(parentLi: any, treeViewMenu: any) {
-    let className = 'menu-open';
-    parentLi.classList.remove("menu-is-opening");
-    parentLi.classList.toggle(className, false);
+    let thisMain = this;
+    parentLi.classList.remove(thisMain.classMenuOpen);
+    parentLi.classList.remove(thisMain.classMenuOpening);
+    window.setTimeout(function () {
+      treeViewMenu.style.display = 'none';
+    }, 300);
   }
 }
