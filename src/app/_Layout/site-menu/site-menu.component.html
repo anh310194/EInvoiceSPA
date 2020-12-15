@@ -36,7 +36,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" id="TreeviewMenu" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item" [ngClass]="(activeItem=='Home')?'menu-open':''">
-                    <a class="nav-link" id="Home" [ngClass]="(activeItem=='Home')?'active':''" (click)="toggle($event)">
+                    <a class="nav-link" id="Home" [ngClass]="(activeItem=='Home')?'active':''" (click) = "toggleClick($event)">
                         <p>
                             Dashboard
                             <i class="right fas fa-angle-left"></i>
@@ -53,9 +53,8 @@
                         </li>
                     </ul>
                 </li>
-                <li *ngFor="let menu of menus" class="nav-item"
-                    [ngClass]="(activeItem==menu.ModuleName)?'menu-open':''">
-                    <a class="nav-link" [ngClass]="(activeItem==menu.ModuleName)?'active':''" (click)="toggle($event)">
+                <li *ngFor="let menu of menus" class="nav-item" [ngClass]="(activeItem==menu.ModuleName)?'menu-open':''">
+                    <a class="nav-link" [ngClass]="(activeItem==menu.ModuleName)?'active':''" (click) = "toggleClick($event)">
                         <p>
                             {{menu.DisplayText}}
                             <i class="right fas fa-angle-left"></i>

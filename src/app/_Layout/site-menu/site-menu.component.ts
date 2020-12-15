@@ -1,17 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import * as $ from 'jquery';
 
 import { AuthenticateService } from '../../_services/authenticate.service';
 import { MenuModel } from '../../_models/AuthModel'
-import { Treeview, KeyTreeview } from '../../_jqueryHelpers/Treeview';
-
-function elements(callBack: any) {
-  let element: any = $("#TreeviewMenu");
-  element.each(function (int: any, el: any) {
-    return callBack(el);
-  });
-}
 
 @Component({
   selector: 'app-site-menu',
@@ -22,14 +13,6 @@ export class SiteMenuComponent implements OnInit {
   activeLink: string = "";
   UserName = 'sysadmin';
   activeItem = 'Home';
-  _element: any;
-  _config: any = {
-    trigger: KeyTreeview.SELECTOR_DATA_WIDGET$2 + " " + KeyTreeview.SELECTOR_LINK,
-    animationSpeed: 300,
-    accordion: false,
-    expandSidebar: false,
-    sidebarButtonSelector: '[data-widget="pushmenu"]'
-  }
   menus: Array<MenuModel>;
   constructor(
     activeRoute: ActivatedRoute,
@@ -46,114 +29,27 @@ export class SiteMenuComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this._element = document.getElementById("TreeviewMenu");
   }
 
   toggleClick(event: any) {
-    this.toggle(event);
-  }
-
-  toggle(event: any) {
-    // Using Jquery
-    let relativeTarget = $(event.currentTarget);
-    let parent = relativeTarget.parent();
-    let treeviewMenu = parent.find("> " + KeyTreeview.SELECTOR_TREEVIEW_MENU);
-
-    if (!treeviewMenu.is(KeyTreeview.SELECTOR_TREEVIEW_MENU)) {
-      if (!parent.is(KeyTreeview.SELECTOR_LI)) {
-        treeviewMenu = parent.parent().find("> " + KeyTreeview.SELECTOR_TREEVIEW_MENU);
-      }
-
-      if (!treeviewMenu.is(KeyTreeview.SELECTOR_TREEVIEW_MENU)) {
-        return;
-      }
-    }
-
-    // event.preventDefault();
-    let parentLi = relativeTarget.parents(KeyTreeview.SELECTOR_LI).first();
-    //let isOpen = parentLi.hasClass(KeyTreeview.CLASS_NAME_OPEN$2);
-    // if (isOpen) {
-    //   this.collapse($(treeviewMenu), parentLi);
-    // }
-    // else {
-    //   this.expand($(treeviewMenu), parentLi);
-    // }
-
-    //Using DOM
-    let classSELECTOR_TREEVIEW_MENU = KeyTreeview.SELECTOR_TREEVIEW_MENU.substr(1);
-    let classSELECTOR_LI = KeyTreeview.SELECTOR_LI.substr(1);
-    let classCLASS_NAME_OPEN = KeyTreeview.CLASS_NAME_OPEN$2.substr(1);
-    let parentDOM = event.currentTarget.parentElement;
-    let treeviewMenuDOM = parentDOM.querySelectorAll(KeyTreeview.SELECTOR_TREEVIEW_MENU);
-
-    if (!this.IsDOM(treeviewMenuDOM, classSELECTOR_TREEVIEW_MENU)) {
-      if (!this.IsDOM(parentDOM, classSELECTOR_LI)) {
-        treeviewMenuDOM = parentDOM.parentElement.getElementsByClassName(classSELECTOR_TREEVIEW_MENU);
-      }
-
-      if (!this.IsDOM(treeviewMenuDOM, KeyTreeview.SELECTOR_TREEVIEW_MENU)) {
-        return;
-      }
-    }
-
     event.preventDefault();
-    let parentLiDOM = event.currentTarget;
-    if (parentLiDOM.classList.contains(classCLASS_NAME_OPEN)) {
-      this.collapse(treeviewMenuDOM, parentLiDOM);
+    //let thisMain = this;
+    let parentEle = event.currentTarget.parentElement;
+    let className = 'menu-open';
+    if (parentEle.classList.contains(className)) {
+      parentEle.classList.remove(className);
     }
-    else {
-      this.expand(treeviewMenuDOM, parentLiDOM);
-    }
-  }
-
-  IsDOM(elements: Array<any>, className: string) {
-    let result = false;
-    for (let i = 0; i < elements.length; i++) {
-      let element = elements[i];
-      if (element.classList.contains(className)) {
-        result = true;
-        break;
-      }
-    }
-    return result;
-  }
-
-  collapse(treeviewMenu: any, parentLi: any) {
-    let thisMain = this;
-
-    let collapseEvent = $.Event(KeyTreeview.EVENT_COLLAPSED$4);
-    parentLi.removeClass(KeyTreeview.CLASS_NAME_IS_OPENING$1 + " " + KeyTreeview.CLASS_NAME_OPEN$2);
-    treeviewMenu.stop().slideUp(thisMain._config.animationSpeed, function () {
-      $(thisMain._element).trigger(collapseEvent);
-      treeviewMenu.find(KeyTreeview.SELECTOR_OPEN + "> " + KeyTreeview.SELECTOR_TREEVIEW_MENU).slideUp();
-      treeviewMenu.find(KeyTreeview.SELECTOR_OPEN).removeClass(KeyTreeview.CLASS_NAME_OPEN$2);
-    });
-  }
-
-  expand(treeviewMenu: any, parentLi: any) {
-    let thisMain = this;
-    var expandedEvent = $.Event(KeyTreeview.EVENT_EXPANDED$3);
-
-    // if (thisMain._config.accordion) {
-    //   let openMenuLi = parentLi.siblings(KeyTreeview.SELECTOR_OPEN).first();
-    //   let openTreeView = openMenuLi.find(KeyTreeview.SELECTOR_TREEVIEW_MENU).first();
-    //   thisMain.collapse(openTreeView, openMenuLi);
-    // }
-
-    parentLi.classList.add(KeyTreeview.CLASS_NAME_IS_OPENING$1);
-    treeviewMenu.stop().slideDown(this._config.animationSpeed, function () {
-      parentLi.addClass(KeyTreeview.CLASS_NAME_OPEN$2);
-      $(thisMain._element).trigger(expandedEvent);
-    });
-
-    if (thisMain._config.expandSidebar) {
-      thisMain._expandSidebar();
-    }
-  }
-
-  private _expandSidebar() {
-    if ($('body').hasClass(KeyTreeview.CLASS_NAME_SIDEBAR_COLLAPSED)) {
-      //$(this._config.sidebarButtonSelector).PushMenu();
-    }
+    else
+      parentEle.classList.add(className);
+    // let treeViewMenu: any = parentEle.querySelectorAll(":scope > .nav-treeview");
+    // treeViewMenu.forEach((element: any) => {
+    //     let className = 'menu-open';
+    //     if (parentEle.classList.contains(className)) {
+    //       parentEle.classList.add(className);
+    //     }
+    //     else {
+    //       parentEle.classList.remove(className);
+    //     }
+    // });
   }
 }
