@@ -29,27 +29,34 @@ export class SiteMenuComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+
   }
 
   toggleClick(event: any) {
     event.preventDefault();
-    //let thisMain = this;
-    let parentEle = event.currentTarget.parentElement;
+
+    let thisMain = this;
+    let parentLi = event.currentTarget.parentElement;
     let className = 'menu-open';
-    if (parentEle.classList.contains(className)) {
-      parentEle.classList.remove(className);
-    }
-    else
-      parentEle.classList.add(className);
-    // let treeViewMenu: any = parentEle.querySelectorAll(":scope > .nav-treeview");
-    // treeViewMenu.forEach((element: any) => {
-    //     let className = 'menu-open';
-    //     if (parentEle.classList.contains(className)) {
-    //       parentEle.classList.add(className);
-    //     }
-    //     else {
-    //       parentEle.classList.remove(className);
-    //     }
-    // });
+    let isOpen = parentLi.classList.contains(className);
+    let treeviewMenus = parentLi.querySelectorAll(":scope > .nav-treeview");
+    treeviewMenus.forEach((treeviewMenu: any) => {
+      if (isOpen)
+        thisMain.collapse(parentLi, treeviewMenu);
+      else thisMain.expand(parentLi, treeviewMenu);
+    });
+  }
+
+  expand(parentLi: any, treeViewMenu: any) {
+    let className = 'menu-open';
+    parentLi.classList.add("menu-is-opening");
+    parentLi.classList.toggle(className);
+
+  }
+
+  collapse(parentLi: any, treeViewMenu: any) {
+    let className = 'menu-open';
+    parentLi.classList.remove("menu-is-opening");
+    parentLi.classList.toggle(className, false);
   }
 }
