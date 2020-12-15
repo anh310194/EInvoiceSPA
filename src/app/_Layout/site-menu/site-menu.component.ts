@@ -36,7 +36,6 @@ export class SiteMenuComponent implements OnInit {
 
   toggleClick(event: any) {
     event.preventDefault();
-
     let thisMain = this;
     let parentLi = event.currentTarget.parentElement;
     let isOpen = parentLi.classList.contains(thisMain.classMenuOpen);
@@ -51,19 +50,20 @@ export class SiteMenuComponent implements OnInit {
 
   expand(parentLi: any, treeViewMenu: any) {
     let thisMain = this;
-    parentLi.classList.add(thisMain.classMenuOpen);
     parentLi.classList.add(thisMain.classMenuOpening);
-    window.setTimeout(function () {
+    //window.setTimeout(function () {
+      parentLi.classList.add(thisMain.classMenuOpen);
       treeViewMenu.style.display = 'block';
-    }, 300);
+    //}, 300);
   }
 
   collapse(parentLi: any, treeViewMenu: any) {
     let thisMain = this;
     parentLi.classList.remove(thisMain.classMenuOpen);
     parentLi.classList.remove(thisMain.classMenuOpening);
-    window.setTimeout(function () {
+    //window.setTimeout(function () {
       treeViewMenu.style.display = 'none';
-    }, 300);
+      parentLi.classList.remove(thisMain.classMenuOpen);
+    //}, 300);
   }
 }

@@ -63,7 +63,7 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
+                    <ul class="nav nav-treeview .toggle-content" [ngclass]="(activeItem==menu.ModuleName)?{'display': 'block'}: {'display': 'none'}">
                         <li *ngFor="let child of menu.Children" class="nav-item">
                             <a href="./{{child.Controller}}" class="nav-link"
                                 [ngClass]="(activeLink==child.ModuleName)?'active':''">
