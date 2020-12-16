@@ -11917,6 +11917,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 
 .nav-sidebar .menu-open > .nav-link i.right,
 .nav-sidebar .menu-is-opening > .nav-link i.right {
+  transition: all 300ms ease;
   transform: rotate(-90deg);
 }
 

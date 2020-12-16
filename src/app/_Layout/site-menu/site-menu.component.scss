@@ -1,9 +1,8 @@
 .toggle-content{
-    display: none;
-    transition: all 300ms ease-in-out;
+    overflow  : hidden;
+    transition: height 300ms ease-in-out;
 }
 
-.toggle-content.isvisible{
-    display : block;
-    opacity: 1;
+.toggle-content:not(.isvisible){
+    display: none;
 }
