@@ -27,7 +27,6 @@
     "bootstrap": "^4.5.3",
     "font-awesome": "^4.7.0",
     "icheck-bootstrap": "^3.0.1",
-    "jquery": "^3.5.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
