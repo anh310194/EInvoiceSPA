@@ -50,20 +50,19 @@ export class SiteMenuComponent implements OnInit {
 
   expand(parentLi: any, treeViewMenu: any) {
     let thisMain = this;
-    parentLi.classList.add(thisMain.classMenuOpening);
+    treeViewMenu.classList.add("isvisible");
     //window.setTimeout(function () {
-      parentLi.classList.add(thisMain.classMenuOpen);
-      treeViewMenu.style.display = 'block';
+       parentLi.classList.toggle(thisMain.classMenuOpening, true);
+       parentLi.classList.toggle(thisMain.classMenuOpen, true);
     //}, 300);
   }
 
   collapse(parentLi: any, treeViewMenu: any) {
     let thisMain = this;
-    parentLi.classList.remove(thisMain.classMenuOpen);
-    parentLi.classList.remove(thisMain.classMenuOpening);
+    treeViewMenu.classList.remove("isvisible");
     //window.setTimeout(function () {
-      treeViewMenu.style.display = 'none';
-      parentLi.classList.remove(thisMain.classMenuOpen);
+       parentLi.classList.toggle(thisMain.classMenuOpen, false);
+       parentLi.classList.toggle(thisMain.classMenuOpening, false);
     //}, 300);
   }
 }
