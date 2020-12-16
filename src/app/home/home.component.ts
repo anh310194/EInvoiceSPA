@@ -6,10 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  public isCollapsed = false;
+  public isCollapsed = 1;
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  toggle(){
+    if(this.isCollapsed == 1){
+      this.isCollapsed = 0;
+    }
+    else{
+      this.isCollapsed = 1
+    }
+  }
 }
